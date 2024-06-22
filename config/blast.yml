@@ -1,0 +1,6 @@
+name: BLAST_CG
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - blast

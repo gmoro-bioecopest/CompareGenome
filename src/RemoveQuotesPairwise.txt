@@ -1,0 +1,6 @@
+#removes quotes from Dbase and create Query.fa (the same than Dbase)
+sed 's,",,g' Dbase.fa >temp.fa; 
+sed 's,-,,g' temp.fa >temp2.fa; 
+cp temp2.fa Dbase.fa;
+cp temp2.fa Query.fa;
+rm temp.fa;rm temp2.fa

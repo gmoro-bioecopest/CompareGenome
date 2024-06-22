@@ -1,0 +1,33 @@
+Info,assign a code to each symbol and paste gm_ bebore the code to create a label 
+Info,"specific codes will replace symbol with label file.edit(paste0(ScriptsDir,""CleanHeaders.R"")) and viceversa #file.edit(paste0(ScriptsDir,""RestoreHeaders.R""))"
+Info,
+Info,
+Data,Symbol
+Data,#
+Data,~
+Data,!
+Data,@
+Data,$
+Data,%
+Data,^
+Data,&
+Data,*
+Data,(
+Data,)
+Data,{
+Data,}
+Data,+
+Data,:
+Data,""""
+Data,>
+Data,<
+Data,?
+Data,","
+Data,.
+Data,/
+Data,;
+Data,[
+Data,]
+Data,-
+Data,=
+Data, 
