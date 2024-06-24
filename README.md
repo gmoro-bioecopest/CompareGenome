@@ -20,7 +20,7 @@ The installation may take several minutes.
 
 1. Clone the repository:
     ```shell
-    $ git clone https://github.com/GabrieleMoro/CompareGenome.git
+    $ git clone https://github.com/gmoro-bioecopest/CompareGenome.git
     ```
 Alternatively, download and unzip
 
