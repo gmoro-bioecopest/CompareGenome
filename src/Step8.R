@@ -51,7 +51,7 @@ myfile <- "EditDf_data.csv"
 newname <- "Fig1_data.csv"
 mycaption <- ""
 Figfol=paste0(JobDir,"Outputs/Blast/ViolinPlot")
-save_output_z(myfile, newname, mycaption,Figfol)
+#save_output_z(myfile, newname, mycaption,Figfol)
 
 system(paste0("cd ", timefol, ";ls >list.csv"))
 outl <- read.csv(paste0(timefol, "list.csv"), header = F)
@@ -68,17 +68,9 @@ if (newname %in% outl$V1) {
 
 myfile1 <- "FigPCA_AllData_RawDataDotPlot.pdf"
 myfile2 <- "FigCluster_AllData_RawDataDendrogram.pdf"
-mycaption <- "\nFig2A,Fig2B - Comparative analysis between the query genomes. Measurement of the relative genomic distance by the Principal Component Analysis (Fig2A) and by the Euclidean distance (Fig2B). Variance normalized pairwise alignment scores were used as data."
+mycaption <- "\nFig2A,Fig2B - Comparative analysis between the query genomes. Measurement of the relative genomic distance by the Principal Component Analysis (Fig2A) and by the Euclidean distance (Fig2B)."
 
 system(paste0("cd ", JobDir, "Outputs; find $PWD -type f -name '", myfile1, "' >", timefol, "outputlist.txt; find $PWD -type f -name '", myfile2, "' >>", timefol, "outputlist.txt"))
-system(paste0("cd ", timefol, ";FILE=outputlist.txt ;
-if
- grep -qs '[^[:space:]]' $FILE;
-then
- echo '", myfile, " not found' >> MissingOutputs.txt
-else
- echo '", mycaption, "' >> Outputs_description.txt
-fi"))
 
 myfile <- myfile1
 newname <- "Fig2A.pdf "
@@ -88,7 +80,7 @@ save_output_z(myfile, newname, mycaption,Figfol)
 
 myfile <- myfile2
 newname <- "Fig2B.pdf "
-mycaption <- ""
+mycaption <- "Fig2A,Fig2B - Comparative analysis between the query genomes. Measurement of the relative genomic distance by the Principal Component Analysis (Fig2A) and by the Euclidean distance (Fig2B)."
 Figfol=paste0(JobDir,"Outputs")
 save_output_z(myfile, newname, mycaption,Figfol)
 
@@ -96,16 +88,10 @@ save_output_z(myfile, newname, mycaption,Figfol)
 myfile <- "*GO_enrichment.pdf"
 mycaption <- "\nFig3A,Fig3B,Fig3C,Fig3D - Functional analysis on the query genomes. GO enrichment analysis on the most conserved gene sequences (pairwise alignment score: 95 to 100%, Fig3A), on the highly similar gene sequences (pairwise alignment score: 85 to 95%, Fig3B), on the moderately similar gene sequences (pairwise alignment score: 70 to 85%, Fig3C) and on the most different gene sequences (pairwise alignment score <70%, Fig3D). Shown the top 20 enriched GO terms (P<0.05, Fisher s test), sorted by the count of gene sequences/GO term.
 NOTE: some genes are not associated to any GO term. These genes have been automatically removed and not considered in the enrichment analysis."
+extranote="NOTE: there may be a repetition of the same GO term in two or more Similarity Classes (potentially all of 4). That is not a mistake as the genes within each class will be different. That happens in particular when many gene are annotated with the same GO terms but the similarity score of these genes makes them assign to different similarity classes."
 
+system(paste0("echo '", mycaption, "' >> ",timefol,"Outputs_description.txt; echo '", extranote, "' >> ",timefol,"Outputs_description.txt"))
 system(paste0("cd ", JobDir, "Outputs; find $PWD -type f -name '", myfile, "' >", timefol, "outputlist.txt"))
-system(paste0("cd ", timefol, ";FILE=outputlist.txt ;
-if
- grep -qs '[^[:space:]]' $FILE;
-then
- echo '", myfile, " not found' >> MissingOutputs.txt
-else
- echo '", mycaption, "' >> Outputs_description.txt
-fi"))
 
 
 myfile <- "MostSimilar*enrichment.pdf"
@@ -240,5 +226,8 @@ if (ol$V2 == "y") {
   
 }
 
+mycaption="\n\nMissingOutputs: when present, it lists all the analyses expected to be done but actually missing. The most common file missing are ones related to GO enrichment analysis and the reason must be found in the uncomplete GO annotation in the reference genome provided. To avoid that, try to provide a fully annotated genome as reference."
+system(paste0("echo '", mycaption, "' >> ",timefol,"Outputs_description.txt"))
+
 system(paste0("cd ", timefol, ";rm outputlist.txt; rm tablelist.txt; rm list.csv"))
-system(paste0("cp ",JobDir,"R_out_job/job*.txt ",timefol))
+#system(paste0("cp ",JobDir,"R_out_job/job*.txt ",timefol))

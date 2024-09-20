@@ -155,8 +155,6 @@ check_genomes() {
     log "ERROR: Insufficient number of inputs. ${__appname__} requires at least 2 genome assemblies."
     log "Exiting..."
     exit 1
-  elif [ "$num_genomes" -lt 4 ]; then
-    log "WARNING: $num_genomes files have been provided as input. Genome distance analyses may not work properly with less than 4 comparisons"
   fi
 
   GENOMES=("${single_genomes[@]}")
